@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naruto RNG Phase 1</title>
+
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial,sans-serif;
+text-align:center;
+margin:0;
+padding:20px;
+}
+
+h1{
+color:orange;
+}
+
+#wheel{
+width:300px;
+height:300px;
+border-radius:50%;
+border:12px solid orange;
+margin:20px auto;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:bold;
+background:#222;
+transition:transform 3s cubic-bezier(.17,.67,.19,1);
+}
+
+button{
+background:orange;
+color:white;
+border:none;
+padding:12px 18px;
+margin:5px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+.panel{
+max-width:900px;
+margin:20px auto;
+background:#1b1b1b;
+padding:15px;
+border-radius:12px;
+}
+
+.log{
+height:250px;
+overflow-y:auto;
+background:black;
+padding:10px;
+border-radius:8px;
+text-align:left;
+white-space:pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Naruto RNG Life Simulator</h1>
+
+<div id="wheel">SPIN</div>
+
+<button onclick="spinClan()">Clan</button>
+<button onclick="spinVillage()">Village</button>
+<button onclick="spinNature()">Nature</button>
+<button onclick="nextYear()">Next Year</button>
+
+<div class="panel">
+<h2>Character</h2>
+<div id="stats"></div>
+</div>
+
+<div class="panel">
+<h2>Timeline</h2>
+<div id="timeline" class="log"></div>
+</div>
+
+<script>
+
+const clans = [
+"Uchiha",
+"Hyuga",
+"Senju",
+"Uzumaki",
+"Nara",
+"Civilian"
+];
+
+const villages = [
+"Leaf",
+"Mist",
+"Sand",
+"Cloud",
+"Stone"
+];
+
+const natures = [
+"Fire",
+"Water",
+"Wind",
+"Earth",
+"Lightning"
+];
+
+let player = {
+age:5,
+clan:"?",
+village:"?",
+nature:"?"
+};
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function log(text){
+const box = document.getElementById("timeline");
+box.innerHTML += text + "\\n";
+box.scrollTop = box.scrollHeight;
+}
+
+function updateStats(){
+document.getElementById("stats").innerHTML = `
+<p><b>Age:</b> ${player.age}</p>
+<p><b>Clan:</b> ${player.clan}</p>
+<p><b>Village:</b> ${player.village}</p>
+<p><b>Nature:</b> ${player.nature}</p>
+`;
+}
+
+function spinWheel(result, callback){
+
+const wheel = document.getElementById("wheel");
+
+wheel.innerHTML = "SPINNING...";
+
+const rotation = 1800 + Math.floor(Math.random()*720);
+
+wheel.style.transform = `rotate(${rotation}deg)`;
+
+setTimeout(()=>{
+wheel.innerHTML = result;
+callback();
+},3000);
+
+}
+
+function spinClan(){
+
+const result = random(clans);
+
+spinWheel(result, ()=>{
+player.clan = result;
+log("Clan: " + result);
+updateStats();
+});
+
+}
+
+function spinVillage(){
+
+const result = random(villages);
+
+spinWheel(result, ()=>{
+player.village = result;
+log("Village: " + result);
+updateStats();
+});
+
+}
+
+function spinNature(){
+
+const result = random(natures);
+
+spinWheel(result, ()=>{
+player.nature = result;
+log("Nature: " + result);
+updateStats();
+});
+
+}
+
+function nextYear(){
+
+player.age++;
+
+const events = [
+"Trained hard.",
+"Completed a mission.",
+"Met a rival.",
+"Learned chakra control.",
+"Protected the village."
+];
+
+log("Age " + player.age + ": " + random(events));
+
+updateStats();
+
+}
+
+updateStats();
+
+</script>
+
+</body>
+</html>
