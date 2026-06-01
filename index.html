@@ -71,11 +71,11 @@ white-space:pre-line;
 
 <div id="wheel">SPIN</div>
 
-<button onclick="spinClan()">Clan</button>
-<button onclick="spinVillage()">Village</button>
-<button onclick="spinNature()">Nature</button>
 <button onclick="spinEyes()">Eyes</button>
 <button onclick="spinRank()">Rank</button>
+<button onclick="spinMaster()">Master</button>
+<button onclick="spinFriend()">Friend</button>
+<button onclick="spinRival()">Rival</button>
 <button onclick="nextYear()">Next Year</button>
 
 <div class="panel">
@@ -130,13 +130,46 @@ const ranks = [
 "ANBU",
 "Kage Candidate"
 ];
+const masters = [
+"Kakashi",
+"Jiraiya",
+"Tsunade",
+"Orochimaru",
+"Might Guy",
+"Minato",
+"Itachi",
+"Hagoromo"
+];
+
+const friends = [
+"Naruto",
+"Sasuke",
+"Sakura",
+"Hinata",
+"Neji",
+"Shikamaru",
+"Gaara",
+"Random Shinobi"
+];
+
+const rivals = [
+"Uchiha Prodigy",
+"Hyuga Genius",
+"Future Kage",
+"Rogue Ninja",
+"Akatsuki Recruit",
+"Otsutsuki Vessel"
+];
 let player = {
 age:5,
 clan:"?",
 village:"?",
 nature:"?",
 eyes:"?",
-rank:"?"
+rank:"?",
+master:"?",
+friend:"?",
+rival:"?"
 };
 
 
@@ -158,8 +191,9 @@ document.getElementById("stats").innerHTML = `
 <p><b>Nature:</b> ${player.nature}</p>
 <p><b>Eyes:</b> ${player.eyes}</p>
 <p><b>Rank:</b> ${player.rank}</p>
-`;
-}
+<p><b>Master:</b> ${player.master}</p>
+<p><b>Friend:</b> ${player.friend}</p>
+<p><b>Rival:</b> ${player.rival}</p>
 
 function spinWheel(result, callback){
 
@@ -232,6 +266,41 @@ const result = random(ranks);
 spinWheel(result, ()=>{
 player.rank = result;
 log("Rank: " + result);
+updateStats();
+});
+
+}
+function spinMaster(){
+
+const result = random(masters);
+
+spinWheel(result, ()=>{
+player.master = result;
+log("Master: " + result);
+updateStats();
+});
+
+}
+
+function spinFriend(){
+
+const result = random(friends);
+
+spinWheel(result, ()=>{
+player.friend = result;
+log("Friend: " + result);
+updateStats();
+});
+
+}
+
+function spinRival(){
+
+const result = random(rivals);
+
+spinWheel(result, ()=>{
+player.rival = result;
+log("Rival: " + result);
 updateStats();
 });
 
