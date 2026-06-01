@@ -74,6 +74,8 @@ white-space:pre-line;
 <button onclick="spinClan()">Clan</button>
 <button onclick="spinVillage()">Village</button>
 <button onclick="spinNature()">Nature</button>
+<button onclick="spinEyes()">Eyes</button>
+<button onclick="spinRank()">Rank</button>
 <button onclick="nextYear()">Next Year</button>
 
 <div class="panel">
@@ -112,13 +114,31 @@ const natures = [
 "Earth",
 "Lightning"
 ];
+const eyes = [
+"No Dojutsu",
+"Byakugan",
+"Sharingan 1 Tomoe",
+"Sharingan 2 Tomoe",
+"Sharingan 3 Tomoe"
+];
 
+const ranks = [
+"Academy Student",
+"Genin",
+"Chunin",
+"Jonin",
+"ANBU",
+"Kage Candidate"
+];
 let player = {
 age:5,
 clan:"?",
 village:"?",
-nature:"?"
+nature:"?",
+eyes:"?",
+rank:"?"
 };
+
 
 function random(arr){
 return arr[Math.floor(Math.random()*arr.length)];
@@ -136,6 +156,8 @@ document.getElementById("stats").innerHTML = `
 <p><b>Clan:</b> ${player.clan}</p>
 <p><b>Village:</b> ${player.village}</p>
 <p><b>Nature:</b> ${player.nature}</p>
+<p><b>Eyes:</b> ${player.eyes}</p>
+<p><b>Rank:</b> ${player.rank}</p>
 `;
 }
 
@@ -191,7 +213,29 @@ updateStats();
 });
 
 }
+function spinEyes(){
 
+const result = random(eyes);
+
+spinWheel(result, ()=>{
+player.eyes = result;
+log("Eyes: " + result);
+updateStats();
+});
+
+}
+
+function spinRank(){
+
+const result = random(ranks);
+
+spinWheel(result, ()=>{
+player.rank = result;
+log("Rank: " + result);
+updateStats();
+});
+
+}
 function nextYear(){
 
 player.age++;
