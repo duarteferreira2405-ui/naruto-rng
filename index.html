@@ -462,7 +462,30 @@ const events = [
 ];
 
 log("Age " + player.age + ": " + random(events));
+if(player.clan === "Uchiha" && player.eyes === "No Dojutsu"){
 
+let awakenChance = 10 + (player.age - 5) * 5;
+
+if(Math.random()*100 < awakenChance){
+
+let eyeRoll = Math.random()*100;
+
+if(eyeRoll < 70){
+player.eyes = "Sharingan 1 Tomoe";
+log("Your Sharingan awakened! (1 Tomoe)");
+}
+else if(eyeRoll < 95){
+player.eyes = "Sharingan 2 Tomoe";
+log("Your Sharingan awakened! (2 Tomoe)");
+}
+else{
+player.eyes = "Sharingan 3 Tomoe";
+log("LEGENDARY AWAKENING! Sharingan 3 Tomoe!");
+}
+
+}
+
+}
 updateStats();
 
 }
