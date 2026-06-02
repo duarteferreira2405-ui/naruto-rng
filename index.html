@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naruto RNG Phase 1</title>
+<title>Naruto RNG Life Simulator</title>
 
 <style>
+
 body{
 background:#111;
 color:white;
@@ -38,10 +39,10 @@ button{
 background:orange;
 color:white;
 border:none;
-padding:12px 18px;
+padding:10px 15px;
 margin:5px;
 border-radius:10px;
-font-size:16px;
+font-size:15px;
 cursor:pointer;
 }
 
@@ -62,6 +63,7 @@ border-radius:8px;
 text-align:left;
 white-space:pre-line;
 }
+
 </style>
 </head>
 
@@ -79,6 +81,7 @@ white-space:pre-line;
 <button onclick="spinMaster()">Master</button>
 <button onclick="spinFriend()">Friend</button>
 <button onclick="spinRival()">Rival</button>
+<button onclick="spinBeast()">Tailed Beast</button>
 <button onclick="nextYear()">Next Year</button>
 
 <div class="panel">
@@ -92,20 +95,21 @@ white-space:pre-line;
 </div>
 
 <script>
-
-const clans = [
+  const clans = [
 "Uchiha",
 "Hyuga",
 "Senju",
 "Uzumaki",
 "Nara",
+"Inuzuka",
+"Aburame",
 "Civilian"
 ];
 
 const villages = [
 "Leaf",
-"Mist",
 "Sand",
+"Mist",
 "Cloud",
 "Stone"
 ];
@@ -117,6 +121,7 @@ const natures = [
 "Earth",
 "Lightning"
 ];
+
 const eyes = [
 "No Dojutsu",
 "Byakugan",
@@ -133,6 +138,7 @@ const ranks = [
 "ANBU",
 "Kage Candidate"
 ];
+
 const masters = [
 "Kakashi",
 "Jiraiya",
@@ -163,6 +169,20 @@ const rivals = [
 "Akatsuki Recruit",
 "Otsutsuki Vessel"
 ];
+
+const beasts = [
+"None",
+"Shukaku",
+"Matatabi",
+"Isobu",
+"Son Goku",
+"Kokuo",
+"Saiken",
+"Chomei",
+"Gyuki",
+"Kurama"
+];
+
 let player = {
 age:5,
 clan:"?",
@@ -172,9 +192,9 @@ eyes:"?",
 rank:"?",
 master:"?",
 friend:"?",
-rival:"?"
+rival:"?",
+beast:"?"
 };
-
 
 function random(arr){
 return arr[Math.floor(Math.random()*arr.length)];
@@ -182,11 +202,12 @@ return arr[Math.floor(Math.random()*arr.length)];
 
 function log(text){
 const box = document.getElementById("timeline");
-box.innerHTML += text + "\\n";
+box.innerHTML += text + "\n";
 box.scrollTop = box.scrollHeight;
 }
 
 function updateStats(){
+
 document.getElementById("stats").innerHTML = `
 <p><b>Age:</b> ${player.age}</p>
 <p><b>Clan:</b> ${player.clan}</p>
@@ -197,8 +218,11 @@ document.getElementById("stats").innerHTML = `
 <p><b>Master:</b> ${player.master}</p>
 <p><b>Friend:</b> ${player.friend}</p>
 <p><b>Rival:</b> ${player.rival}</p>
+<p><b>Tailed Beast:</b> ${player.beast}</p>
 `;
+
 }
+
 function spinWheel(result, callback){
 
 const wheel = document.getElementById("wheel");
@@ -215,8 +239,7 @@ callback();
 },3000);
 
 }
-
-function spinClan(){
+  function spinClan(){
 
 const result = random(clans);
 
@@ -251,6 +274,7 @@ updateStats();
 });
 
 }
+
 function spinEyes(){
 
 const result = random(eyes);
@@ -274,6 +298,7 @@ updateStats();
 });
 
 }
+
 function spinMaster(){
 
 const result = random(masters);
@@ -309,6 +334,19 @@ updateStats();
 });
 
 }
+
+function spinBeast(){
+
+const result = random(beasts);
+
+spinWheel(result, ()=>{
+player.beast = result;
+log("Tailed Beast: " + result);
+updateStats();
+});
+
+}
+
 function nextYear(){
 
 player.age++;
@@ -318,7 +356,9 @@ const events = [
 "Completed a mission.",
 "Met a rival.",
 "Learned chakra control.",
-"Protected the village."
+"Protected the village.",
+"Found a mentor.",
+"Unlocked new potential."
 ];
 
 log("Age " + player.age + ": " + random(events));
