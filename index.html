@@ -82,6 +82,7 @@ white-space:pre-line;
 <button onclick="spinFriend()">Friend</button>
 <button onclick="spinRival()">Rival</button>
 <button onclick="spinBeast()">Tailed Beast</button>
+  <button onclick="evolveEyes()">Evolve Eyes</button>
 <button onclick="nextYear()">Next Year</button>
 
 <div class="panel">
@@ -127,7 +128,10 @@ const eyes = [
 "Byakugan",
 "Sharingan 1 Tomoe",
 "Sharingan 2 Tomoe",
-"Sharingan 3 Tomoe"
+"Sharingan 3 Tomoe",
+"Mangekyo Sharingan",
+"Eternal Mangekyo Sharingan",
+"Rinnegan"
 ];
 
 const ranks = [
@@ -346,7 +350,44 @@ updateStats();
 });
 
 }
+function evolveEyes(){
 
+if(player.eyes === "Sharingan 1 Tomoe"){
+player.eyes = "Sharingan 2 Tomoe";
+log("Your Sharingan evolved to 2 Tomoe!");
+}
+
+else if(player.eyes === "Sharingan 2 Tomoe"){
+player.eyes = "Sharingan 3 Tomoe";
+log("Your Sharingan evolved to 3 Tomoe!");
+}
+
+else if(player.eyes === "Sharingan 3 Tomoe"){
+player.eyes = "Mangekyo Sharingan";
+log("You awakened the Mangekyo Sharingan!");
+}
+
+else if(player.eyes === "Mangekyo Sharingan"){
+player.eyes = "Eternal Mangekyo Sharingan";
+log("You obtained the Eternal Mangekyo Sharingan!");
+}
+
+else if(player.eyes === "Eternal Mangekyo Sharingan"){
+player.eyes = "Rinnegan";
+log("You awakened the Rinnegan!");
+}
+
+else if(player.eyes === "Rinnegan"){
+log("Your eyes are already at their highest evolution!");
+}
+
+else{
+log("You cannot evolve these eyes.");
+}
+
+updateStats();
+
+}
 function nextYear(){
 
 player.age++;
