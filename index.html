@@ -71,6 +71,9 @@ white-space:pre-line;
 
 <div id="wheel">SPIN</div>
 
+<button onclick="spinClan()">Clan</button>
+<button onclick="spinVillage()">Village</button>
+<button onclick="spinNature()">Nature</button>
 <button onclick="spinEyes()">Eyes</button>
 <button onclick="spinRank()">Rank</button>
 <button onclick="spinMaster()">Master</button>
@@ -194,7 +197,8 @@ document.getElementById("stats").innerHTML = `
 <p><b>Master:</b> ${player.master}</p>
 <p><b>Friend:</b> ${player.friend}</p>
 <p><b>Rival:</b> ${player.rival}</p>
-
+`;
+}
 function spinWheel(result, callback){
 
 const wheel = document.getElementById("wheel");
