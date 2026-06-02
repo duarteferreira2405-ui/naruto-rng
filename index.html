@@ -96,15 +96,30 @@ white-space:pre-line;
 </div>
 
 <script>
-  const clans = [
-"Uchiha",
-"Hyuga",
-"Senju",
-"Uzumaki",
+  const commonClans = [
+"Civilian",
 "Nara",
 "Inuzuka",
-"Aburame",
-"Civilian"
+"Aburame"
+];
+
+const uncommonClans = [
+"Hyuga"
+];
+
+const rareClans = [
+"Uzumaki",
+"Hatake",
+"Namikaze"
+];
+
+const legendaryClans = [
+"Uchiha",
+"Senju"
+];
+
+const mythicClans = [
+"Otsutsuki"
 ];
 
 const villages = [
@@ -245,12 +260,56 @@ callback();
 }
   function spinClan(){
 
-const result = random(clans);
+let result;
+let rarityRoll = Math.random()*100;
+
+if(rarityRoll < 50){
+result = random(commonClans);
+log("Common Clan!");
+}
+else if(rarityRoll < 75){
+result = random(uncommonClans);
+log("Uncommon Clan!");
+}
+else if(rarityRoll < 90){
+result = random(rareClans);
+log("Rare Clan!");
+}
+else if(rarityRoll < 99){
+result = random(legendaryClans);
+log("Legendary Clan!");
+}
+else{
+result = random(mythicClans);
+log("MYTHIC CLAN!");
+}
 
 spinWheel(result, ()=>{
+
 player.clan = result;
-log("Clan: " + result);
+
+if(result === "Uchiha"){
+
+let eyeRoll = Math.random()*100;
+
+if(eyeRoll < 40){
+player.eyes = "No Dojutsu";
+}
+else if(eyeRoll < 70){
+player.eyes = "Sharingan 1 Tomoe";
+}
+else if(eyeRoll < 90){
+player.eyes = "Sharingan 2 Tomoe";
+}
+else{
+player.eyes = "Sharingan 3 Tomoe";
+}
+
+log("Uchiha blood awakened!");
+}
+
 updateStats();
+
 });
 
 }
