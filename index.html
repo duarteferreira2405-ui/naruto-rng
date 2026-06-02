@@ -463,7 +463,29 @@ const events = [
 
 log("Age " + player.age + ": " + random(events));
 if(player.clan === "Uchiha" && player.eyes === "No Dojutsu"){
+if(player.eyes === "Sharingan 1 Tomoe"){
 
+if(Math.random()*100 < 20){
+
+player.eyes = "Sharingan 2 Tomoe";
+
+log("Your Sharingan evolved naturally to 2 Tomoe!");
+
+}
+
+}
+
+if(player.eyes === "Sharingan 2 Tomoe"){
+
+if(Math.random()*100 < 15){
+
+player.eyes = "Sharingan 3 Tomoe";
+
+log("Your Sharingan evolved naturally to 3 Tomoe!");
+
+}
+
+}
 let awakenChance = 10 + (player.age - 5) * 5;
 
 if(Math.random()*100 < awakenChance){
