@@ -121,7 +121,25 @@ const legendaryClans = [
 const mythicClans = [
 "Otsutsuki"
 ];
+const commonFamilies = [
+"Merchant Family",
+"Farmer Family",
+"Blacksmith Family"
+];
 
+const rareFamilies = [
+"Hatake",
+"Hozuki",
+"Yuki"
+];
+
+const legendaryFamilies = [
+"Namikaze"
+];
+
+const mythicFamilies = [
+"Kaguya"
+];
 const villages = [
 "Leaf",
 "Sand",
@@ -213,6 +231,7 @@ master:"?",
 friend:"?",
 rival:"?",
 beast:"?"
+family:"?"
 };
 
 function random(arr){
@@ -230,6 +249,7 @@ function updateStats(){
 document.getElementById("stats").innerHTML = `
 <p><b>Age:</b> ${player.age}</p>
 <p><b>Clan:</b> ${player.clan}</p>
+<p><b>Family:</b> ${player.family}</p>
 <p><b>Village:</b> ${player.village}</p>
 <p><b>Nature:</b> ${player.nature}</p>
 <p><b>Eyes:</b> ${player.eyes}</p>
